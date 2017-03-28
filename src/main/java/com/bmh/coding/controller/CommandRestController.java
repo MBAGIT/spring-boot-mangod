@@ -23,7 +23,8 @@ import com.bmh.coding.repository.ICommandRepository;
  * @author Mohamed
  *
  */
-@RestController("/service")
+@RestController
+@RequestMapping("/commadService")
 public class CommandRestController {
 
 	private final ICommandRepository commandRepository;
@@ -46,15 +47,15 @@ public class CommandRestController {
 	 */
 	@RequestMapping(value = "/addCommand", method = RequestMethod.POST)
 	public ResponseEntity<?> addCommande(@RequestBody Command input) {
-		try {
-			Command saveCommande = this.commandRepository.save(new Command(input.reference, input.mount, input.valid));
+//		try {
+			Command saveCommande = this.commandRepository.save(new Command(input.reference, input.mount, input.valid, input.commandeNumber));
 			// construct location to send the new entity
 			URI location = ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand(saveCommande).toUri();
 
 			return ResponseEntity.created(location).build();
-		} catch (Exception e) {
-			return ResponseEntity.noContent().build();
-		}
+//		} catch (Exception e) {
+//			return ResponseEntity.noContent().build();
+//		}
 
 	}
 
@@ -64,7 +65,7 @@ public class CommandRestController {
 	 * @return {@link Command}
 	 */
 	@RequestMapping(value = "/command/{id}", method = RequestMethod.GET)
-	public Command getCommande(@PathVariable Long id) {
+	public Command getCommande(@PathVariable String id) {
 
 		return this.commandRepository.findById(id).orElseThrow(() -> new CommandNotFoundException(id));
 
@@ -76,8 +77,8 @@ public class CommandRestController {
 	 * @param reference
 	 * @return {@link Command}
 	 */
-	@RequestMapping(value = "/command/{reference}", method = RequestMethod.GET)
-	public Command getCommande(@PathVariable String reference) {
+	@RequestMapping(value = "/command/reference/{reference}", method = RequestMethod.GET)
+	public Command getCommandeByreference(@PathVariable String reference) {
 
 		return this.commandRepository.findByReference(reference).orElseThrow(() -> new CommandNotFoundException(reference));
 

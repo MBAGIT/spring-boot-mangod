@@ -22,7 +22,7 @@ public interface ICommandRepository extends MongoRepository<Command, String> {
 	 * @param id
 	 * @return {@link Optional} {@link Command}
 	 */
-	Optional<Command> findById(Long id);
+	Optional<Command> findById(String id);
 
 	/** 
 	 * findByCommandeNumber method

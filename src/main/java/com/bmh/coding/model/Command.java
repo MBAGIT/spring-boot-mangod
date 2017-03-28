@@ -21,7 +21,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Command {
 
 	@Id
-	public Long id;
+	public String id;
 
 	@NotBlank
 	@Size(max = 250)
@@ -33,6 +33,8 @@ public class Command {
 	public Date creationDate = new Date();
 
 	public Boolean valid = false;
+	
+	public Double mount;
 
 	/**
 	 * 
@@ -45,97 +47,16 @@ public class Command {
 	 * @param reference
 	 * @param mount
 	 */
-	public Command(String reference, Double mount, Boolean valid) {
+	public Command(String reference, Double mount, Boolean valid,Integer commandeNumber) {
 
 		this.reference = reference;
 		this.mount = mount;
 		this.valid = valid;
+		this.commandeNumber=commandeNumber;
 	}
 
-	public Double mount;
+	
 
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	/**
-	 * @return the commandeNumber
-	 */
-	public Integer getCommandeNumber() {
-		return commandeNumber;
-	}
-
-	/**
-	 * @param commandeNumber the commandeNumber to set
-	 */
-	public void setCommandeNumber(Integer commandeNumber) {
-		this.commandeNumber = commandeNumber;
-	}
-
-	/**
-	 * @return the reference
-	 */
-	public String getReference() {
-		return reference;
-	}
-
-	/**
-	 * @param reference the reference to set
-	 */
-	public void setReference(String reference) {
-		this.reference = reference;
-	}
-
-	/**
-	 * @return the mount
-	 */
-	public Double getMount() {
-		return mount;
-	}
-
-	/**
-	 * @param mount the mount to set
-	 */
-	public void setMount(Double mount) {
-		this.mount = mount;
-	}
-
-	/**
-	 * @return the creationDate
-	 */
-	public Date getCreationDate() {
-		return creationDate;
-	}
-
-	/**
-	 * @param creationDate the creationDate to set
-	 */
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-
-	/**
-	 * @return the valid
-	 */
-	public Boolean getValid() {
-		return valid;
-	}
-
-	/**
-	 * @param valid the valid to set
-	 */
-	public void setValid(Boolean valid) {
-		this.valid = valid;
-	}
+	
 
 }
