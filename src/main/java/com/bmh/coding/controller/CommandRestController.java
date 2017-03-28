@@ -6,6 +6,8 @@ package com.bmh.coding.controller;
 
 import java.net.URI;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +28,8 @@ import com.bmh.coding.repository.ICommandRepository;
 @RestController
 @RequestMapping("/commadService")
 public class CommandRestController {
+	
+	private final Logger log = LoggerFactory.getLogger(CommandRestController.class);
 
 	private final ICommandRepository commandRepository;
 
@@ -47,15 +51,16 @@ public class CommandRestController {
 	 */
 	@RequestMapping(value = "/addCommand", method = RequestMethod.POST)
 	public ResponseEntity<?> addCommande(@RequestBody Command input) {
-//		try {
+		try {
 			Command saveCommande = this.commandRepository.save(new Command(input.reference, input.mount, input.valid, input.commandeNumber));
 			// construct location to send the new entity
 			URI location = ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand(saveCommande).toUri();
 
 			return ResponseEntity.created(location).build();
-//		} catch (Exception e) {
-//			return ResponseEntity.noContent().build();
-//		}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			return ResponseEntity.noContent().build();
+		}
 
 	}
 
