@@ -1,2 +1,2 @@
-# spring-boot-mangod
-Demo spring-boot-mangodb-app service 
+# spring-boot-mangodB Demo
+Microservice developed with spring boot ,Mongo DB, spring data 
