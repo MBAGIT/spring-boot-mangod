@@ -5,6 +5,7 @@
 package com.bmh.coding.controller;
 
 import java.net.URI;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -99,5 +100,18 @@ public class CommandRestController {
 				.orElseThrow(() -> new CommandNotFoundException(reference));
 
 	}
+
+	/**
+	 * @return
+	 * @see org.springframework.data.mongodb.repository.MongoRepository#findAll()
+	 */
+	@RequestMapping(value = "/commands", method = RequestMethod.GET)
+	public List<Command> findAll() {
+		return commandRepository.findAll();
+	}
+	
+	
+	
+	
 
 }
