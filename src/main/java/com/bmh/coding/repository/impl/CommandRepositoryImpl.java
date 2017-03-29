@@ -19,6 +19,7 @@ import com.mongodb.WriteResult;
  * @author Mohamed
  *
  */
+//Impl postfix of the name on it compared to the core repository interface
 public class CommandRepositoryImpl implements CommandRepositoryCustom {
 	
 	
