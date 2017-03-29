@@ -28,7 +28,7 @@ import com.bmh.coding.repository.ICommandRepository;
  *
  */
 @RestController
-@RequestMapping("/commadService")
+@RequestMapping("/commandService")
 public class CommandRestController {
 
 	private final Logger log = LoggerFactory.getLogger(CommandRestController.class);
