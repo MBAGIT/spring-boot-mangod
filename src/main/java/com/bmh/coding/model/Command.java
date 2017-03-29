@@ -21,20 +21,20 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Command {
 
 	@Id
-	public String id;
+	private  String id;
 
 	@NotBlank
 	@Size(max = 250)
 	@Indexed(unique = true)
-	public Integer commandeNumber;
+	private Integer commandeNumber;
 
-	public String reference;
+	private String reference;
 
-	public Date creationDate = new Date();
+	private Date creationDate = new Date();
 
-	public Boolean valid = false;
+	private Boolean valid = false;
 	
-	public Double mount;
+	private Double mount;
 
 	/**
 	 * 
@@ -53,6 +53,90 @@ public class Command {
 		this.mount = mount;
 		this.valid = valid;
 		this.commandeNumber=commandeNumber;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the commandeNumber
+	 */
+	public Integer getCommandeNumber() {
+		return commandeNumber;
+	}
+
+	/**
+	 * @param commandeNumber the commandeNumber to set
+	 */
+	public void setCommandeNumber(Integer commandeNumber) {
+		this.commandeNumber = commandeNumber;
+	}
+
+	/**
+	 * @return the reference
+	 */
+	public String getReference() {
+		return reference;
+	}
+
+	/**
+	 * @param reference the reference to set
+	 */
+	public void setReference(String reference) {
+		this.reference = reference;
+	}
+
+	/**
+	 * @return the creationDate
+	 */
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	/**
+	 * @param creationDate the creationDate to set
+	 */
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	/**
+	 * @return the valid
+	 */
+	public Boolean getValid() {
+		return valid;
+	}
+
+	/**
+	 * @param valid the valid to set
+	 */
+	public void setValid(Boolean valid) {
+		this.valid = valid;
+	}
+
+	/**
+	 * @return the mount
+	 */
+	public Double getMount() {
+		return mount;
+	}
+
+	/**
+	 * @param mount the mount to set
+	 */
+	public void setMount(Double mount) {
+		this.mount = mount;
 	}
 
 	

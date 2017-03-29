@@ -21,7 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.bmh.coding.exception.CommandNotFoundException;
 import com.bmh.coding.model.Command;
-import com.bmh.coding.repository.ICommandRepository;
+import com.bmh.coding.repository.CommandRepository;
 
 /**
  * @author Mohamed
@@ -33,14 +33,14 @@ public class CommandRestController {
 
 	private final Logger log = LoggerFactory.getLogger(CommandRestController.class);
 
-	private final ICommandRepository commandRepository;
+	private final CommandRepository commandRepository;
 
 	/**
 	 * Constructor with attributes
 	 * @param commandeRepository
 	 */
 	@Autowired
-	public CommandRestController(ICommandRepository commandRepository) {
+	public CommandRestController(CommandRepository commandRepository) {
 
 		this.commandRepository = commandRepository;
 	}
@@ -56,15 +56,15 @@ public class CommandRestController {
 		try {
 
 			// test if command existe
-			boolean present = this.commandRepository.findByReference(input.reference).isPresent();
+			boolean present = this.commandRepository.findByReference(input.getReference()).isPresent();
 
 			// if present return HttpStatus.CONFLICT
 			if (present) {
 				return new ResponseEntity<>(input, HttpStatus.CONFLICT);
 			}
 			// save command
-			Command saveCommande = this.commandRepository
-					.save(new Command(input.reference, input.mount, input.valid, input.commandeNumber));
+			Command saveCommande = this.commandRepository.save(
+					new Command(input.getReference(), input.getMount(), input.getValid(), input.getCommandeNumber()));
 			// construct location to send the new entity
 			URI location = ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand(saveCommande).toUri();
 
@@ -107,11 +107,9 @@ public class CommandRestController {
 	 */
 	@RequestMapping(value = "/commands", method = RequestMethod.GET)
 	public List<Command> findAll() {
+
+		//		commandRepository.findAll(Example.of(new Command()) , Page<T>);
 		return commandRepository.findAll();
 	}
-	
-	
-	
-	
 
 }
