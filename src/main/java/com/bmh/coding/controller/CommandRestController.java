@@ -9,6 +9,7 @@ import java.net.URI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,7 +29,7 @@ import com.bmh.coding.repository.ICommandRepository;
 @RestController
 @RequestMapping("/commadService")
 public class CommandRestController {
-	
+
 	private final Logger log = LoggerFactory.getLogger(CommandRestController.class);
 
 	private final ICommandRepository commandRepository;
@@ -52,7 +53,17 @@ public class CommandRestController {
 	@RequestMapping(value = "/addCommand", method = RequestMethod.POST)
 	public ResponseEntity<?> addCommande(@RequestBody Command input) {
 		try {
-			Command saveCommande = this.commandRepository.save(new Command(input.reference, input.mount, input.valid, input.commandeNumber));
+
+			// test if command existe
+			boolean present = this.commandRepository.findByReference(input.reference).isPresent();
+
+			// if present return HttpStatus.CONFLICT
+			if (present) {
+				return new ResponseEntity<>(input, HttpStatus.CONFLICT);
+			}
+			// save command
+			Command saveCommande = this.commandRepository
+					.save(new Command(input.reference, input.mount, input.valid, input.commandeNumber));
 			// construct location to send the new entity
 			URI location = ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand(saveCommande).toUri();
 
@@ -75,8 +86,7 @@ public class CommandRestController {
 		return this.commandRepository.findById(id).orElseThrow(() -> new CommandNotFoundException(id));
 
 	}
-	
-	
+
 	/**
 	 * Method to return command information
 	 * @param reference
@@ -85,7 +95,8 @@ public class CommandRestController {
 	@RequestMapping(value = "/command/reference/{reference}", method = RequestMethod.GET)
 	public Command getCommandeByreference(@PathVariable String reference) {
 
-		return this.commandRepository.findByReference(reference).orElseThrow(() -> new CommandNotFoundException(reference));
+		return this.commandRepository.findByReference(reference)
+				.orElseThrow(() -> new CommandNotFoundException(reference));
 
 	}
 
