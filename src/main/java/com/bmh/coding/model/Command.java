@@ -139,6 +139,15 @@ public class Command {
 		this.mount = mount;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Command [id=" + id + ", commandeNumber=" + commandeNumber + ", reference=" + reference
+				+ ", creationDate=" + creationDate + ", valid=" + valid + ", mount=" + mount + "]";
+	}
+
 	
 
 	

@@ -1,0 +1,30 @@
+{
+	"Commandes": [
+		{
+			"reference": "ref1",
+			"mount": 21.3,
+			"valid": true,
+			"commandeNumber": 1
+		},
+		{
+			"reference": "ref2",
+			"mount": 23.6,
+			"valid": true
+		},
+		{
+			"reference": "ref3",
+			"mount": 5.36,
+			"valid": true
+		},
+		{
+			"reference": "ref4",
+			"mount": 12,
+			"valid": true
+		},
+		{
+			"reference": "ref5",
+			"mount": 55,
+			"valid": true
+		}
+	]
+}

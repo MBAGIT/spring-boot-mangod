@@ -18,6 +18,6 @@ public interface CommandRepositoryCustom {
 	 * @param valid
 	 * @return {@link Integer}
 	 */
-	public int updateCommand(Integer mount, Boolean valid);
+	public int updateCommand(Double mount, Boolean valid);
 
 }

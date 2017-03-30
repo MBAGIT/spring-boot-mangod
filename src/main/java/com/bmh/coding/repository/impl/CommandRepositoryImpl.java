@@ -35,13 +35,13 @@ public class CommandRepositoryImpl implements CommandRepositoryCustom {
 	 * (non-Javadoc)
 	 * @see com.bmh.coding.repository.CommandRepositoryCustom#updateCommand(java.lang.Integer, java.lang.Boolean)
 	 */
-	public int updateCommand(Integer mount,Boolean valid){
+	public int updateCommand(Double mount,Boolean valid){
 		
-		Query query = new Query(Criteria.where("mount").gte(mount)) ;
+		Query query = new Query(Criteria.where("mount").is(mount)) ;
 		Update update = new Update();
 		update.set("valid", valid);
 		
-		WriteResult result = mongoTemplate.updateFirst(query, update, Command.class);
+		WriteResult result = mongoTemplate.updateMulti(query, update, Command.class);
 		
 		if(result!=null)
             return result.getN();

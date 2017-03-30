@@ -7,7 +7,6 @@ package com.bmh.coding.repository;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
@@ -17,12 +16,11 @@ import org.springframework.data.mongodb.repository.Query;
 
 import com.bmh.coding.model.Command;
 
-
 /**
  * @author Mohamed
  *
  */
-public interface CommandRepository extends MongoRepository<Command, String>,CommandRepositoryCustom {
+public interface CommandRepository extends MongoRepository<Command, String>, CommandRepositoryCustom {
 
 	/** 
 	 * findById method
@@ -55,11 +53,9 @@ public interface CommandRepository extends MongoRepository<Command, String>,Comm
 	 * @return
 	 */
 	Slice<Command> findByReference(String reference, Pageable pageable);
-	
-	
+
 	List<Command> findByMount(String lastname, Sort sort);
-	
-	
+
 	/**
 	 *  Limiting the result size of a query with Top and First
 	 */
@@ -69,26 +65,12 @@ public interface CommandRepository extends MongoRepository<Command, String>,Comm
 	 * @return
 	 */
 	Slice<Command> findTop3BycreationDate(Date creationDate, Pageable pageable);
-	
-	
-	
-	
-	/**
-	 * Stream the result of a query with Java 8 Stream<T>
-	 * @return
-	 */
-	@Query("select c from Command c")
-	Stream<Command> findAllByCustomQueryAndStream();
-	
-	
+
 	//Supports native JSON query string
-    @Query("{id:'?0'}")
-    Command findCustomById(String id);
+	@Query("{id:'?0'}")
+	Command findCustomById(String id);
 
-    @Query("{domain: { $regex: ?0 } })")
-    List<Command> findCustomByRegExReference(String reference);
-
-
-	
+	@Query("{domain: { $regex: ?0 } })")
+	List<Command> findCustomByRegExReference(String reference);
 
 }
