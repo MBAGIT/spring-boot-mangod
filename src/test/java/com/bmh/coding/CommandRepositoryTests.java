@@ -48,7 +48,7 @@ public class CommandRepositoryTests {
 	
 	@Test
 	@UsingDataSet(locations ="commands.json", loadStrategy = LoadStrategyEnum.CLEAN_INSERT)
-	public void updateCommandwhenMountEqualsValue() throws Exception {
+	public void TestCustomQueryUpdateCommandwhenMountEqualsValue() throws Exception {
 
 		assertEquals(1, unit.updateCommand(12d, false));
 
@@ -75,11 +75,6 @@ public class CommandRepositoryTests {
 			return queued.getMongo();
 		}
 		
-		@Override
-        protected String getMappingBasePackage() {
-            return "org.startup.queue.repository";
-        }
-
 
 	}
 
