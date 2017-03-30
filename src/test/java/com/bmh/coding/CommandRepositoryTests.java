@@ -34,7 +34,6 @@ import com.mongodb.Mongo;
 @ContextConfiguration
 public class CommandRepositoryTests {
 
-	
 	@Autowired
 	private ApplicationContext applicationContext;
 
@@ -46,29 +45,12 @@ public class CommandRepositoryTests {
 	@Autowired
 	private CommandRepository unit;
 
-	/**
-	 *  @UsingDataSet is used to seed database with defined data set. 
-	 *  In brief data sets are files that contain all data to be inserted to configured database. 
-	 *  In order to seed your database, use @UsingDataSet annotation, you can define it either on the test itself or on the class level.
-	 *  If there is definition on both, test level annotation takes precedence. This annotation has two attributes locations and loadStrategy .
-	 *
-	 *	With locations attribute you can specify classpath datasets location. 
-	 *  Second attribute provides strategies for inserting data. Implemented strategies are:
-	 *
-	 *	INSERT Insert defined datasets before executing any test method. 
-	 *	DELETE_ALL Deletes all elements of database before executing any test method. 
-	 *	CLEAN_INSERT This is the most used strategy. It deletes all elements of database and then insert defined datasets before executing any test method
-	 *	
-	 *	For more informations see :https://github.com/lordofthejars/nosql-unit#seeding_database
-	 * @throws Exception
-	 */
+	
 	@Test
-	@UsingDataSet(locations = "commands.json", loadStrategy = LoadStrategyEnum.CLEAN_INSERT)
+	@UsingDataSet(locations ="commands.json", loadStrategy = LoadStrategyEnum.CLEAN_INSERT)
 	public void updateCommandwhenMountEqualsValue() throws Exception {
 
 		assertEquals(1, unit.updateCommand(12d, false));
-
-		unit.findAll().stream().forEach(System.out::println);
 
 	}
 
@@ -92,6 +74,12 @@ public class CommandRepositoryTests {
 			Fongo queued = new Fongo("Commandes");
 			return queued.getMongo();
 		}
+		
+		@Override
+        protected String getMappingBasePackage() {
+            return "org.startup.queue.repository";
+        }
+
 
 	}
 
