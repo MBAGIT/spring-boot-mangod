@@ -37,8 +37,8 @@ public class CommandRepositoryTests {
 	@Autowired
 	private ApplicationContext applicationContext;
 
-	// create default spring mongo db 
-	// with no-sqlunit
+	// create demo-test spring mongo db for test
+	// with no-sqlunit ( memory database)
 	@Rule
 	public MongoDbRule mongoDbRule = MongoDbRuleBuilder.newMongoDbRule().defaultSpringMongoDb("demo-test");
 
